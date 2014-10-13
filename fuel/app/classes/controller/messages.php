@@ -37,11 +37,18 @@ class Controller_Messages extends Controller_Template
 	{
 		is_null($id) and Response::redirect('messages');
 
-		if ( ! $data['message'] = Model_Message::find($id))
+		if ( ! $message = Model_Message::find($id))
 		{
 			Session::set_flash('error', 'Could not find message #'.$id);
 			Response::redirect('messages');
 		}
+
+		$comments = Model_Comment::find('all', array('where'=>array('message_id'=>$id)));
+
+		$data = array(
+			'message' => $message,
+			'comments' => $comments
+		);
 
 		$this->template->title = "Message";
 		$this->template->content = View::forge('messages/view', $data);

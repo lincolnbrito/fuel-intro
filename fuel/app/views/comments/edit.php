@@ -7,4 +7,4 @@
 <br>
 <?php $message = isset($message) ? $message : ''; ?>
 <?php echo $form; ?>
-<p><?php echo Html::anchor('message/view/'.$comment->message_id, 'Back') ?></p>
+<p><?php echo Html::anchor('messages/view/'.$comment->message_id, 'Back') ?></p>
