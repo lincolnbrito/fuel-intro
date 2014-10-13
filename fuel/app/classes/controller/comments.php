@@ -3,6 +3,20 @@
 class Controller_Comments extends Controller_Template
 {
 
+	public function action_delete($id){
+		$comment = Model_Comment::find($id);
+		if($comment)
+		{
+			$comment->delete();
+			Session::set_flash('success', 'Deleted comment #'.$id);
+		}
+		else
+		{
+			Session::set_flash('error', 'Could not delete comment #'.$id);
+		}
+		Response::redirect('messages/view/'.$comment->message_id);
+	}
+
 	public function action_edit($id = null)
 	{
 		$comment = Model_Comment::find($id);
