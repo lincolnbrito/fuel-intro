@@ -14,6 +14,7 @@ class Controller_Comments extends Controller_Template
 	{
 		$data["subnav"] = array('create'=> 'active' );
 		$this->template->title = 'Comments &raquo; Create';
+		$data['form'] = View::forge('comments/_form');
 		$this->template->content = View::forge('comments/create', $data);
 	}
 
