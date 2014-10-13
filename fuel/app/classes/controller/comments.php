@@ -3,10 +3,33 @@
 class Controller_Comments extends Controller_Template
 {
 
-	public function action_edit()
+	public function action_edit($id = null)
 	{
+		$comment = Model_Comment::find($id);
+
+		if(Input::post())
+		{
+			$comment->name = Input::post('name');
+			$comment->comment = Input::post('comment');
+			if($comment->save())
+			{
+				Session::set_flash('success', 'Updated comment #'.$id);
+				Response::redirect('messages/view/'.$comment->message_id);
+			}
+			else
+			{
+				Session::set_flash('error', 'Could not update comment #'.$id);
+			}
+		}
+		else
+		{
+			$this->template->set_global('comment', $comment, false);
+			$this->template->set_global('message', $comment->message_id, false);
+		}
+
 		$data["subnav"] = array('edit'=> 'active' );
 		$this->template->title = 'Comments &raquo; Edit';
+		$data['form'] = View::forge('comments/_form');
 		$this->template->content = View::forge('comments/edit', $data);
 	}
 

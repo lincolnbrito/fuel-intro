@@ -3,4 +3,8 @@
 	<li class='<?php echo Arr::get($subnav, "create" ); ?>'><?php echo Html::anchor('comments/create','Create');?></li>
 
 </ul>
-<p>Edit</p>
+<h2>Editing Comment</h2>
+<br>
+<?php $message = isset($message) ? $message : ''; ?>
+<?php echo $form; ?>
+<p><?php echo Html::anchor('message/view/'.$comment->message_id, 'Back') ?></p>
