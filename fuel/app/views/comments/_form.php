@@ -1,7 +1,7 @@
 <?php echo Form::open(); ?>
 <p>
 	<?php echo Form::label('Name', 'name'); ?>
-	<?php echo Form::label('name', Input::post('name', isset($comment) ? $comment->name : '')); ?>
+	<?php echo Form::input('name', Input::post('name', isset($comment) ? $comment->name : '')); ?>
 </p>
 <p>
 	<?php echo Form::label('Comment', 'comment') ?>
