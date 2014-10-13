@@ -7,7 +7,7 @@
 			<?php echo $message->name; ?>
 			<ul>
 				<li><?php echo $message->message; ?></li>
-				<li><?php echo Html::anchor('messages/view/'.$message->id, 'View'); ?></li>
+				<li><?php echo Html::anchor('messages/view/'.$message->id, $comment_links[$message->id]); ?></li>
 				<li><?php echo Html::anchor('messages/edit/'.$message->id, 'Edit'); ?></li>
 				<li><?php echo Html::anchor('messages/delete/'.$message->id, 'Delete', array('onclick'=>"return confirm('Are you sure?')")); ?></li>
 			</ul>

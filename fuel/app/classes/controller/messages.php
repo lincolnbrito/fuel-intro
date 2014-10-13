@@ -4,9 +4,32 @@ class Controller_Messages extends Controller_Template
 
 	public function action_index()
 	{
-		$data['messages'] = Model_Message::find('all');
+		$messages = Model_Message::find('all');
+
+		$comment_links = array();
+		foreach ($messages as $message) {
+			$results = DB::select()
+				->from('comments')
+				->where('message_id', $message->id)
+				->execute();
+
+			$count = count($results);
+			if($count==0)
+			{
+				$comment_links[$message->id] = "View";
+			}
+			else
+			{
+				$comment_links[$message->id] = $count.' '.Inflector::pluralize('Comment', $count);
+			}
+
+
+		}
+		$view = View::forge('messages/index');
+		$view->set('comment_links', $comment_links);
+		$view->set('messages', $messages);
 		$this->template->title = "Messages";
-		$this->template->content = View::forge('messages/index', $data);
+		$this->template->content = $view;
 
 	}
 
